@@ -1,6 +1,6 @@
 # Processes and signals
 
-Project done during **Full Stack Software Engineering studies** at **Holberton School**. It aims to learn about PID, processes and commands that handles them (`ps`, `pgrep`, `pkill`, `kill`, etc) in **Bash**.
+Project done during **Full Stack Software Engineering** at **ALX**. It aims to learn about PID, processes and commands that handles them (`ps`, `pgrep`, `pkill`, `kill`, etc) in **Bash**.
 
 ## Technologies
 * Scripts written in Bash 4.3.11(1)
