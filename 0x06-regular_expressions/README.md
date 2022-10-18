@@ -1,15 +1,15 @@
 # Regular expression
-Project done during **Full Stack Software Engineering studies** at **Holberton School**. It aims to learn about how to build a regular expression.
+Project done during **Full Stack Software Engineering** at **ALX**. It aims to learn about how to build a regular expression.
 
 ## Technologies
-* Scripts written in Bash 4.3.11(1)
-* Tested on Ubuntu 14.04 LTS
+* Scripts written in Bash 
+* Tested on Ubuntu 20.04 LTS
 
 ## Files
 
 | Filename | Description |
 | -------- | ----------- |
-| `0-simply_match_holberton.rb` | A regular expression that matches `Holberton` |
+| `0-simply_match_school.rb` | A regular expression that matches `School` |
 | `1-repetition_token_0.rb` | A regular expression that matches `hbttn` |
 | `2-repetition_token_1.rb` | A regular expression that matches `htn` and `hbtn` |
 | `3-repetition_token_2.rb` | A regular expression that matches `hbtn`, where the letter `t` can be replied |
