@@ -1,4 +1,4 @@
-# 0x06. Regular expression
+# 0x06 Regular expression
 Project done during **Full Stack Software Engineering** at **ALX**. It aims to learn about how to build a regular expression.
 
 ## Technologies
