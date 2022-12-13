@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-# Bash script that Install nginx on your web-01 server and requirements
-apt-get update -y
-apt-get install nginx -y
-echo "Hello World!" > /var/www/html/index.html
-service nginx start
+# Installs Nginx with the following configurations:
+#+    Listens on port 80.
+#+    Returns a page containing "Hello World!" when queried
+#++    at the root with a curl GET request.
+
+sudo apt update
+sudo apt install nginx
+sudo chown -R $USER:$USER /var/www
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo service nginx start
+
