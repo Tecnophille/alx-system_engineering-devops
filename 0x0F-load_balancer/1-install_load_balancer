@@ -6,7 +6,7 @@ sudo add-apt-repository -y ppa:vbernat/haproxy-2.4
 sudo apt-get -y install haproxy
 
 # the load balancer's configuration
-DOMAIN_NAME='beta-scribbles.tech'
+DOMAIN_NAME='gobrand.tech'
 INIT_FILE='/etc/default/haproxy'
 CONFIG_FILE='/etc/haproxy/haproxy.cfg'
 HAPROXY_LB_CONFIG=\
@@ -14,8 +14,8 @@ HAPROXY_LB_CONFIG=\
 #--$DOMAIN_NAME-params-begin--
 backend $DOMAIN_NAME-backend
 	balance roundrobin
-	server 914-web-01 34.138.32.248:80 check
-	server 914-web-02 3.226.74.205:80 check
+	server 914-web-01 18.210.33.134 check
+	server 914-web-02 18.210.13.242 check
 frontend $DOMAIN_NAME-frontend
 	bind *:80
 	mode http
