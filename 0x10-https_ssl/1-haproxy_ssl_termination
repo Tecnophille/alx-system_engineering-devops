@@ -34,13 +34,13 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 
 # start of parameters for ruthmarcuss.tech
-frontend ruthmarcuss.tech-http-frontend
+frontend gobrand.tech-http-frontend
 	bind	 *:80
 	option forwardfor
 	default_backend	 nginx_webservers
 
 
-frontend  ruthmarcuss.tech-https-frontend
+frontend  gobrand.tech-https-frontend
 	bind *:443 ssl crt /etc/letsencrypt/live/www.ruthmarcuss.tech.tech/fullchain.pem
         default_backend nginx_webservers
 
