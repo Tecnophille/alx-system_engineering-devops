@@ -1,0 +1,17 @@
+When you type "https://www.google.com" into your browser and press enter, a series of events is triggered that allows you to access the Google homepage.
+
+First, your browser will send a Domain Name System (DNS) request to a DNS server. This request is made to translate the human-readable domain name (www.google.com) into an IP address that computers can understand. The DNS server will respond with the IP address for the server hosting the Google website.
+
+Next, your browser will establish a Transmission Control Protocol/Internet Protocol (TCP/IP) connection with the server using the IP address it received from the DNS server. This is the protocol that allows different devices to communicate with each other over the internet.
+
+As the connection is being established, it may pass through a firewall. A firewall is a security system that controls incoming and outgoing network traffic based on predetermined security rules. It helps to protect the server from malicious attacks by blocking traffic from unknown sources.
+
+Once the connection is established, the browser will send an HTTPS request to the server. HTTPS (Hypertext Transfer Protocol Secure) is a secure version of HTTP, the protocol used for transferring data on the web. HTTPS uses an encryption method called Secure Sockets Layer (SSL) to protect the data being transmitted from being intercepted by third parties.
+
+The request from the browser may be routed through a load-balancer before it reaches the web server. A load-balancer is a device that distributes incoming requests to a group of servers to optimize resource use, maximize throughput, and minimize response time.
+
+The web server will then process the request and send a response back to the browser. The response will typically include the HTML, CSS, and JavaScript files that are needed to render the webpage.
+
+In some cases, the web server may need to send a request to an application server to retrieve data from a database. An application server is a server that hosts applications and handles application-specific tasks, such as interacting with a database. The database is a collection of data that is organized and stored in a structured way, allowing for efficient access and modification.
+
+Once the necessary files and data have been retrieved, the web server will send the response back to the browser, which will use the HTML, CSS, and JavaScript to render the webpage on your screen
