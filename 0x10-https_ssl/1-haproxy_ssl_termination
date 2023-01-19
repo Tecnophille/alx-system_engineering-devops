@@ -47,6 +47,6 @@ frontend  gobrand.tech-https-frontend
 
 backend nginx_webservers
         balance roundrobin
-        server 61590-web-01 18.204.7.186:80 check
-        server 61590-web-02 3.83.245.14:80 check
+        server 61590-web-01  check
+        server 61590-web-02  check
 # end of parameters
