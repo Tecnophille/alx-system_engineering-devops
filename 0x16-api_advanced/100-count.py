@@ -1,43 +1,87 @@
 #!/usr/bin/python3
-"""Contains the count_words function"""
+'''A module containing functions for working with the Reddit API.
+'''
 import requests
 
 
-def count_words(subreddit, word_list, found_list=[], after=None):
-    '''Prints counts of given words found in hot posts of a given subreddit.
-
-    Args:
-        subreddit (str): The subreddit to search.
-        word_list (list): The list of words to search for in post titles.
-        found_list (obj): Key/value pairs of words/counts.
-        after (str): The parameter for the next page of the API results.
+def sort_histogram(histogram={}):
+    '''Sorts and prints the given histogram.
     '''
-    user_agent = {'User-agent': 'test45'}
-    posts = requests.get('http://www.reddit.com/r/{}/hot.json?after={}'
-                         .format(subreddit, after), headers=user_agent)
-    if after is None:
-        word_list = [word.lower() for word in word_list]
-
-    if posts.status_code == 200:
-        posts = posts.json()['data']
-        aft = posts['after']
-        posts = posts['children']
-        for post in posts:
-            title = post['data']['title'].lower()
-            for word in title.split(' '):
-                if word in word_list:
-                    found_list.append(word)
-        if aft is not None:
-            count_words(subreddit, word_list, found_list, aft)
+    histogram = list(filter(lambda kv: kv[1], histogram))
+    histogram_dict = {}
+    for item in histogram:
+        if item[0] in histogram_dict:
+            histogram_dict[item[0]] += item[1]
         else:
-            result = {}
-            for word in found_list:
-                if word.lower() in result.keys():
-                    result[word.lower()] += 1
-                else:
-                    result[word.lower()] = 1
-            for key, value in sorted(result.items(), key=lambda item: item[1],
-                                     reverse=True):
-                print('{}: {}'.format(key, value))
+            histogram_dict[item[0]] = item[1]
+    histogram = list(histogram_dict.items())
+    histogram.sort(
+        key=lambda kv: kv[0],
+        reverse=False
+    )
+    histogram.sort(
+        key=lambda kv: kv[1],
+        reverse=True
+    )
+    res_str = '\n'.join(list(map(
+        lambda kv: '{}: {}'.format(kv[0], kv[1]),
+        histogram
+    )))
+    if res_str:
+        print(res_str)
+
+
+def count_words(subreddit, word_list, histogram=[], n=0, after=None):
+    '''Counts the number of times each word in a given wordlist
+    occurs in a given subreddit.
+    '''
+    api_headers = {
+        'Accept': 'application/json',
+        'User-Agent': ' '.join([
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'AppleWebKit/537.36 (KHTML, like Gecko)',
+            'Chrome/97.0.4692.71',
+            'Safari/537.36',
+            'Edg/97.0.1072.62'
+        ])
+    }
+    sort = 'hot'
+    limit = 30
+    res = requests.get(
+        '{}/r/{}/.json?sort={}&limit={}&count={}&after={}'.format(
+            'https://www.reddit.com',
+            subreddit,
+            sort,
+            limit,
+            n,
+            after if after else ''
+        ),
+        headers=api_headers,
+        allow_redirects=False
+    )
+    if not histogram:
+        word_list = list(map(lambda word: word.lower(), word_list))
+        histogram = list(map(lambda word: (word, 0), word_list))
+    if res.status_code == 200:
+        data = res.json()['data']
+        posts = data['children']
+        titles = list(map(lambda post: post['data']['title'], posts))
+        histogram = list(map(
+            lambda kv: (kv[0], kv[1] + sum(list(map(
+                lambda txt: txt.lower().split().count(kv[0]),
+                titles
+            )))),
+            histogram
+        ))
+        if len(posts) >= limit and data['after']:
+            count_words(
+                subreddit,
+                word_list,
+                histogram,
+                n + len(posts),
+                data['after']
+            )
+        else:
+            sort_histogram(histogram)
     else:
         return
